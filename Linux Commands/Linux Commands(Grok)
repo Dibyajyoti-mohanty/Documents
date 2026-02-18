@@ -1,0 +1,588 @@
+### Basic Linux Commands
+
+#### 1. File and Directory Management
+These commands handle navigation, creation, deletion, and manipulation of files and directories.
+
+**ls** - List directory contents.
+- `ls`: Lists files in the current directory.
+- `ls -l`: Lists files with detailed information like permissions and size.
+- `ls -a`: Lists all files, including hidden ones.
+- `ls /home`: Lists contents of the /home directory.
+- `ls -lh`: Lists files with human-readable sizes.
+
+**cd** - Change directory.
+- `cd /etc`: Changes to the /etc directory.
+- `cd ~`: Changes to the home directory.
+- `cd ..`: Moves up one directory level.
+- `cd`: Returns to the home directory (no arguments).
+- `cd /var/log`: Changes to the /var/log directory.
+
+**pwd** - Print working directory.
+- `pwd`: Shows the current directory path.
+- `pwd` (after cd /tmp): Outputs /tmp.
+- `pwd` (in home): Outputs /home/username.
+- `pwd` (in root): Outputs /.
+- `pwd` (in /usr/bin): Outputs /usr/bin.
+
+**mkdir** - Make directory.
+- `mkdir newdir`: Creates a directory called newdir.
+- `mkdir -p parent/child`: Creates nested directories.
+- `mkdir dir1 dir2`: Creates multiple directories.
+- `mkdir /tmp/test`: Creates test in /tmp.
+- `mkdir -m 755 secure`: Creates directory with specific permissions.
+
+**rmdir** - Remove empty directory.
+- `rmdir empty`: Removes the empty directory.
+- `rmdir dir1 dir2`: Removes multiple empty directories.
+- `rmdir /tmp/test`: Removes test in /tmp if empty.
+- `rmdir -p parent/child`: Removes nested empty directories.
+- `rmdir olddir`: Removes olddir if it's empty.
+
+**touch** - Create empty file or update timestamp.
+- `touch file.txt`: Creates an empty file.
+- `touch -t 202601010000 file`: Sets timestamp to Jan 1, 2026.
+- `touch existing.txt`: Updates timestamp of existing file.
+- `touch file1 file2`: Creates multiple files.
+- `touch /tmp/log`: Creates log in /tmp.
+
+**cp** - Copy files or directories.
+- `cp file.txt copy.txt`: Copies file to copy.txt.
+- `cp -r dir1 dir2`: Copies directory recursively.
+- `cp file.txt /backup`: Copies to /backup directory.
+- `cp -p file.txt copy`: Preserves permissions and timestamps.
+- `cp *.txt docs/`: Copies all .txt files to docs/.
+
+**mv** - Move or rename files/directories.
+- `mv file.txt newname.txt`: Renames file.
+- `mv file.txt /newdir`: Moves file to /newdir.
+- `mv dir1 dir2`: Renames directory.
+- `mv *.jpg images/`: Moves all .jpg to images/.
+- `mv old.txt new.txt`: Renames old to new.
+
+**rm** - Remove files or directories.
+- `rm file.txt`: Deletes file.txt.
+- `rm -r dir`: Deletes directory recursively.
+- `rm -f force.txt`: Deletes without prompting.
+- `rm *.tmp`: Deletes all .tmp files.
+- `rm -i important.txt`: Prompts before deletion.
+
+#### 2. Text Viewing and Editing
+Commands for viewing, searching, and editing text files.
+
+**cat** - Concatenate and display files.
+- `cat file.txt`: Displays contents of file.txt.
+- `cat file1.txt file2.txt`: Displays both files.
+- `cat -n file.txt`: Displays with line numbers.
+- `cat > newfile.txt`: Creates new file from input (Ctrl+D to end).
+- `cat file.txt >> append.txt`: Appends to append.txt.
+
+**more** - View file one screen at a time.
+- `more longfile.txt`: Paginates longfile.txt.
+- `more -d file.txt`: Paginates with prompts.
+- `more /etc/passwd`: Views system file.
+- `more file1 file2`: Views multiple files sequentially.
+- `more +10 file.txt`: Starts from line 10.
+
+**less** - Advanced pager for viewing files.
+- `less file.txt`: Views file with navigation.
+- `less -N file.txt`: Shows line numbers.
+- `less /var/log/syslog`: Views log file.
+- `less +/search file.txt`: Searches for "search" on load.
+- `less file1 file2`: Views multiple files.
+
+**head** - Display beginning of file.
+- `head file.txt`: Shows first 10 lines.
+- `head -n 5 file.txt`: Shows first 5 lines.
+- `head -c 100 file.txt`: Shows first 100 bytes.
+- `head /etc/hosts`: Shows top of hosts file.
+- `head *.log`: Shows head of all .log files.
+
+**tail** - Display end of file.
+- `tail file.txt`: Shows last 10 lines.
+- `tail -n 20 file.txt`: Shows last 20 lines.
+- `tail -f log.txt`: Follows log in real-time.
+- `tail -c 500 file.txt`: Shows last 500 bytes.
+- `tail /var/log/auth.log`: Monitors auth log.
+
+**nano** - Simple text editor.
+- `nano file.txt`: Edits file.txt.
+- `nano -w file.txt`: Edits without word wrap.
+- `nano +10 file.txt`: Opens at line 10.
+- `nano /etc/config`: Edits config file.
+- `nano newfile.txt`: Creates and edits new file.
+
+**vi** or **vim** - Advanced text editor.
+- `vi file.txt`: Edits file.txt.
+- `vi +/search file.txt`: Opens and searches for "search".
+- `vi -r file.txt`: Recovers from crash.
+- `vi /etc/hosts`: Edits hosts file.
+- `vi newfile.txt`: Creates and edits new file.
+
+**grep** - Search text using patterns.
+- `grep "word" file.txt`: Searches for "word" in file.
+- `grep -r "pattern" dir/`: Recursive search in dir.
+- `grep -i "case" file.txt`: Case-insensitive search.
+- `grep -v "exclude" file.txt`: Inverts match.
+- `grep "^start" file.txt`: Matches lines starting with "start".
+
+#### 3. System Information
+Commands to get details about the system.
+
+**uname** - System information.
+- `uname -a`: All system info.
+- `uname -r`: Kernel release.
+- `uname -m`: Machine hardware name.
+- `uname -s`: Kernel name.
+- `uname -o`: Operating system.
+
+**whoami** - Display current user.
+- `whoami`: Shows username.
+- `whoami` (as root): Outputs root.
+- `whoami` (in script): Captures user in script.
+- `whoami` (after su): Shows switched user.
+- `whoami` (in terminal): Basic user check.
+
+**df** - Disk space usage.
+- `df -h`: Human-readable disk usage.
+- `df /`: Usage of root filesystem.
+- `df -T`: Shows filesystem types.
+- `df -i`: Inode usage.
+- `df /home`: Usage of /home.
+
+**du** - Directory space usage.
+- `du -sh /dir`: Summary in human-readable.
+- `du -h /home`: Human-readable for /home.
+- `du -c *.txt`: Total for .txt files.
+- `du --max-depth=1`: One level deep.
+- `du /var/log`: Usage of log dir.
+
+**free** - Memory usage.
+- `free -h`: Human-readable memory info.
+- `free -m`: In megabytes.
+- `free -s 5`: Updates every 5 seconds.
+- `free -t`: Includes total line.
+- `free -w`: Wide format.
+
+**uptime** - System uptime.
+- `uptime`: Shows uptime and load.
+- `uptime -p`: Pretty format.
+- `uptime -s`: System up since.
+- `uptime` (in script): Monitors load.
+- `uptime` (remote): Via SSH.
+
+#### 4. Process Management
+Commands to manage running processes.
+
+**ps** - Process status.
+- `ps aux`: All processes.
+- `ps -ef`: Full format.
+- `ps -u user`: Processes by user.
+- `ps -p 1234`: Specific PID.
+- `ps -o pid,cmd`: Custom output.
+
+**top** - Interactive process viewer.
+- `top`: Starts interactive mode.
+- `top -u user`: Processes for user.
+- `top -p 1234`: Monitor PID.
+- `top -b -n 1`: Batch mode once.
+- `top -d 2`: Delay 2 seconds.
+
+**kill** - Terminate process.
+- `kill 1234`: Kills PID 1234.
+- `kill -9 5678`: Force kill.
+- `kill -15 pid`: Graceful terminate.
+- `kill -l`: List signals.
+- `kill -SIGTERM pid`: Same as default.
+
+**killall** - Kill processes by name.
+- `killall firefox`: Kills all firefox.
+- `killall -9 chrome`: Force kill.
+- `killall -u user`: Kills user's processes.
+- `killall -i name`: Interactive.
+- `killall -r "pat*ern"`: Regex match.
+
+**nice** - Run with modified priority.
+- `nice -n 10 command`: Runs with niceness 10.
+- `nice -5 highprio`: Negative for higher priority.
+- `nice command`: Default +10.
+- `nice -n 15 sleep 100`: Low priority.
+- `nice -20 urgent`: Max priority (root only).
+
+**renice** - Change priority of running process.
+- `renice 10 -p 1234`: Sets niceness 10 for PID.
+- `renice -5 -u user`: For all user's processes.
+- `renice 0 -g group`: For group.
+- `renice 15 5678`: Increases niceness.
+- `renice -10 pid`: Decreases (higher priority).
+
+#### 5. Permissions and Ownership
+Manage file access rights.
+
+**chmod** - Change file mode.
+- `chmod 755 script.sh`: Executable by owner, readable by others.
+- `chmod +x file`: Adds execute permission.
+- `chmod -R 644 dir/`: Recursive.
+- `chmod u+w file`: Write for user.
+- `chmod 600 private.key`: Owner only read/write.
+
+**chown** - Change owner.
+- `chown user file`: Changes owner to user.
+- `chown -R user:group dir/`: Recursive with group.
+- `chown root file`: To root.
+- `chown user: dir`: Owner and group.
+- `chown -h user symlink`: For symlink.
+
+**chgrp** - Change group.
+- `chgrp group file`: Changes group.
+- `chgrp -R group dir/`: Recursive.
+- `chgrp staff project/`: To staff group.
+- `chgrp -h group link`: For symlink.
+- `chgrp users shared.txt`: To users.
+
+#### 6. Networking
+Commands for network configuration and diagnostics.
+
+**ping** - Test network connectivity.
+- `ping google.com`: Pings google.com.
+- `ping -c 4 example.com`: 4 packets.
+- `ping -i 2 host`: Interval 2 seconds.
+- `ping 192.168.1.1`: IP address.
+- `ping -s 100 host`: Packet size 100.
+
+**ifconfig** or **ip addr** - Network interfaces (ifconfig deprecated; use ip).
+- `ip addr show`: Shows interfaces.
+- `ip addr show eth0`: Specific interface.
+- `ip link set eth0 up`: Brings up.
+- `ip route`: Shows routes.
+- `ip addr add 192.168.1.100/24 dev eth0`: Adds IP.
+
+**netstat** or **ss** - Network statistics (netstat deprecated; use ss).
+- `ss -tuln`: TCP/UDP listening.
+- `ss -p`: With processes.
+- `ss -s`: Summary.
+- `ss dst 192.168.1.1`: Destination filter.
+- `ss -m`: Memory usage.
+
+**wget** - Download files.
+- `wget https://example.com/file`: Downloads file.
+- `wget -O output.txt url`: Saves as output.txt.
+- `wget -r site`: Recursive download.
+- `wget -c url`: Continue interrupted.
+- `wget --limit-rate=100k url`: Rate limit.
+
+**curl** - Transfer data.
+- `curl https://api.example.com`: Gets data.
+- `curl -O file url`: Downloads.
+- `curl -d "data" url`: POST data.
+- `curl -I url`: Headers only.
+- `curl -u user:pass url`: Basic auth.
+
+**ssh** - Secure shell.
+- `ssh user@host`: Connects to host.
+- `ssh -p 2222 host`: Custom port.
+- `ssh -i key.pem host`: Key auth.
+- `ssh user@host command`: Runs remote command.
+- `ssh -X host`: X11 forwarding.
+
+#### 7. Package Management (Ubuntu/Debian-based)
+Assuming APT for Debian-like systems.
+
+**apt update** - Update package list.
+- `sudo apt update`: Refreshes repositories.
+- `sudo apt update -y`: Assumes yes.
+- `sudo apt update` (with proxy): Uses env proxy.
+- `sudo apt update --allow-releaseinfo-change`: Handles changes.
+- `sudo apt update` (quiet): With -q.
+
+**apt install** - Install package.
+- `sudo apt install vim`: Installs vim.
+- `sudo apt install -y package`: No prompt.
+- `sudo apt install ./debfile.deb`: Local deb.
+- `sudo apt install package=version`: Specific version.
+- `sudo apt install --reinstall package`: Reinstall.
+
+**apt remove** - Remove package.
+- `sudo apt remove vim`: Removes vim.
+- `sudo apt remove -y package`: No prompt.
+- `sudo apt purge package`: Removes with config.
+- `sudo apt autoremove`: Cleans unused.
+- `sudo apt remove package1 package2`: Multiple.
+
+**apt search** - Search packages.
+- `apt search keyword`: Searches for keyword.
+- `apt search ^vim`: Starts with vim.
+- `apt search -n keyword`: Names only.
+- `apt search keyword | grep desc`: Filters.
+- `apt search installed`: No, use dpkg.
+
+**dpkg** - Package manager.
+- `dpkg -i debfile.deb`: Installs deb.
+- `dpkg -r package`: Removes.
+- `dpkg -l`: Lists installed.
+- `dpkg -s package`: Status.
+- `dpkg --purge package`: Purges.
+
+#### 8. Archiving and Compression
+Handle compressed files.
+
+**tar** - Archive files.
+- `tar -cvf archive.tar dir/`: Creates tar.
+- `tar -xvf archive.tar`: Extracts.
+- `tar -czvf archive.tgz dir/`: Gzip compress.
+- `tar -xzvf archive.tgz`: Extract gzip.
+- `tar -tvf archive.tar`: Lists contents.
+
+**zip** - Compress to zip.
+- `zip archive.zip file.txt`: Zips file.
+- `zip -r archive.zip dir/`: Recursive.
+- `zip -e archive.zip file`: Encrypted.
+- `zip -d archive.zip file`: Delete from zip.
+- `zip -T archive.zip`: Test integrity.
+
+**unzip** - Extract zip.
+- `unzip archive.zip`: Extracts.
+- `unzip archive.zip -d dir/`: To dir.
+- `unzip -l archive.zip`: Lists.
+- `unzip -p archive.zip file`: Extracts to stdout.
+- `unzip -o archive.zip`: Overwrites.
+
+**gzip** - Compress files.
+- `gzip file.txt`: Compresses to .gz.
+- `gzip -d file.gz`: Decompresses.
+- `gzip -9 file`: Max compression.
+- `gzip -k file`: Keep original.
+- `gzip -l file.gz`: Info.
+
+**gunzip** - Decompress gzip.
+- `gunzip file.gz`: Decompresses.
+- `gunzip -k file.gz`: Keep gz.
+- `gunzip -c file.gz > out`: To file.
+- `gunzip -f file.gz`: Force.
+- `gunzip *.gz`: All gz files.
+
+#### 9. Advanced Text Processing
+More powerful tools for text manipulation.
+
+**sed** - Stream editor.
+- `sed 's/old/new/' file`: Replaces first old with new.
+- `sed 's/old/new/g' file`: Global replace.
+- `sed -i 's/old/new/' file`: In-place.
+- `sed '/pattern/d' file`: Deletes lines with pattern.
+- `sed '1,5d' file`: Deletes first 5 lines.
+
+**awk** - Pattern scanning and processing.
+- `awk '{print $1}' file`: Prints first field.
+- `awk -F: '{print $1}' /etc/passwd`: First field by :.
+- `awk 'NR==5' file`: Prints line 5.
+- `awk '{sum+=$1} END {print sum}' file`: Sums column.
+- `awk '/pattern/ {print}' file`: Matches pattern.
+
+**find** - Search for files.
+- `find /dir -name "*.txt"`: Finds .txt in /dir.
+- `find . -type f -size +10M`: Files >10M.
+- `find / -user user`: Owned by user.
+- `find . -mtime -7`: Modified last 7 days.
+- `find . -exec rm {} \;`: Deletes found.
+
+**xargs** - Build and execute commands.
+- `find . -name "*.tmp" | xargs rm`: Deletes .tmp.
+- `echo "1 2 3" | xargs echo`: Echoes args.
+- `xargs -I {} mv {} new/ < list`: Moves from list.
+- `find . | xargs grep "pattern"`: Searches.
+- `xargs -p command`: Prompts.
+
+**tee** - Read from stdin and write to stdout/files.
+- `command | tee file.txt`: Writes to file and stdout.
+- `ls | tee -a log.txt`: Appends.
+- `echo "text" | tee file1 file2`: To multiple files.
+- `command | tee /dev/null`: Discards but runs.
+- `ps aux | tee proc.log`: Logs processes.
+
+#### 10. System Administration (Advanced)
+For system maintenance.
+
+**sudo** - Execute as superuser.
+- `sudo command`: Runs as root.
+- `sudo -u user command`: As specific user.
+- `sudo -i`: Root shell.
+- `sudo -l`: Lists privileges.
+- `sudo -s`: Shell as root.
+
+**useradd** - Add user.
+- `sudo useradd newuser`: Creates user.
+- `sudo useradd -m user`: With home dir.
+- `sudo useradd -G group user`: Adds to group.
+- `sudo useradd -s /bin/bash user`: Shell.
+- `sudo useradd -e 2026-12-31 user`: Expiry.
+
+**passwd** - Change password.
+- `passwd`: Changes own password.
+- `sudo passwd user`: For user.
+- `passwd -l user`: Locks.
+- `passwd -u user`: Unlocks.
+- `passwd -d user`: Deletes password.
+
+**crontab** - Schedule jobs.
+- `crontab -e`: Edits crontab.
+- `crontab -l`: Lists.
+- `crontab -r`: Removes.
+- `crontab file`: Installs from file.
+- `crontab -u user -e`: For user.
+
+**systemctl** - Manage services (systemd).
+- `sudo systemctl start service`: Starts.
+- `sudo systemctl stop service`: Stops.
+- `sudo systemctl status service`: Status.
+- `sudo systemctl enable service`: Enables on boot.
+- `sudo systemctl restart service`: Restarts.
+
+**journalctl** - View logs (systemd).
+- `journalctl`: Shows logs.
+- `journalctl -u service`: For service.
+- `journalctl -f`: Follow.
+- `journalctl --since "2026-02-01"`: From date.
+- `journalctl -p err`: Errors only.
+
+
+
+
+This covers a progression from basic to advanced. You can copy this into a text file for reference. Practice in a safe environment like a virtual machine.
+
+No, that's **not all** — Linux has hundreds (even thousands) of commands if you count every utility, but the list I gave earlier covers ~80–90% of what most beginners-to-intermediate users (and even many daily sysadmins/DevOps people) actually use regularly.
+
+The previous list focused on the most universal and frequently needed commands. Below are the **most commonly recommended "next level" or missing commands** that appear again and again in 2025–2026 cheat sheets, DevOps/SRE guides, and sysadmin lists.
+
+I'll group them into categories with **5 practical examples each** (just like before). You can copy-paste these to add to your text file.
+
+### 11. Advanced File & Text Processing (very frequently used in real work)
+
+**sort** — Sort lines of text files
+- `sort file.txt` → sorts alphabetically
+- `sort -n numbers.txt` → numeric sort
+- `sort -r file.txt` → reverse order
+- `sort -k2 file.txt` → sort by 2nd column
+- `ls -l | sort -k5 -n` → sort files by size numerically
+
+**uniq** — Report or omit repeated lines (usually piped after sort)
+- `sort file.txt | uniq` → remove duplicates
+- `sort file.txt | uniq -c` → count occurrences
+- `sort access.log | uniq -c | sort -nr` → top IPs by count
+- `cat file.txt | uniq -d` → show only duplicated lines
+- `history | cut -d' ' -f2- | sort | uniq -c | sort -nr` → most used commands
+
+**cut** — Remove sections from each line of files
+- `cut -d: -f1 /etc/passwd` → list usernames
+- `cut -c1-10 file.txt` → first 10 characters
+- `ls -l | cut -d' ' -f9` → list only filenames
+- `cut -d, -f2,4 data.csv` → columns 2 and 4
+- `ps aux | cut -c1-80` → truncate wide output
+
+**tr** — Translate or delete characters
+- `echo "Hello World" | tr 'a-z' 'A-Z'` → uppercase
+- `cat file.txt | tr -d ' \t'` → remove spaces & tabs
+- `echo "one,two,three" | tr ',' '\n'` → comma to newline
+- `cat file | tr -s ' '` → squeeze multiple spaces
+- `echo "file_name.txt" | tr '_' '-'` → replace underscore
+
+**wc** — Word, line, character, byte count
+- `wc file.txt` → lines, words, bytes
+- `wc -l file.txt` → only line count
+- `find . -type f | wc -l` → count files in directory
+- `cat access.log | wc -l` → count log entries
+- `ls | wc -w` → count items in directory
+
+### 12. Disk & Filesystem (very important for troubleshooting)
+
+**df** (you already have, but useful variants)
+- `df -hT` → human-readable + filesystem type
+- `df -i` → inode usage (very useful when "disk full" but df shows space)
+- `df -h --total` → add grand total
+
+**du** (already have, good additions)
+- `du -sh * | sort -hr` → largest items in current dir
+- `du -h --max-depth=1 /var | sort -hr` → top-level usage in /var
+
+**fdisk** / **lsblk** / **blkid** — disk partitioning & info
+- `lsblk -f` → list block devices + filesystem types
+- `sudo fdisk -l` → list all disks & partitions
+- `blkid` → show UUIDs and types of devices
+- `lsblk -o NAME,SIZE,TYPE,MOUNTPOINT` → clean device overview
+- `sudo fdisk /dev/sdb` → interactive partitioning (careful!)
+
+**mount** / **umount**
+- `mount` → show mounted filesystems
+- `sudo mount /dev/sda1 /mnt` → mount partition
+- `sudo umount /mnt` → unmount
+- `mount | grep /home` → check specific mount
+- `sudo mount -o remount,rw /` → remount root read-write
+
+### 13. Very Useful Everyday/DevOps Tools
+
+**which** / **whereis** / **type**
+- `which python3` → full path to binary
+- `whereis vim` → binary + source + man pages
+- `type ls` → tell if alias, function, or binary
+- `which -a python` → all matching commands
+- `type -a grep` → show aliases + real command
+
+**alias** (create shortcuts)
+- `alias ll='ls -lah'` → permanent in ~/.bashrc
+- `alias update='sudo apt update && sudo apt upgrade -y'`
+- `alias gs='git status'`
+- `alias rm='rm -i'` → safe delete
+- `unalias ll` → remove alias
+
+**history** — command history
+- `history` → show last commands
+- `history | grep apt` → find apt commands
+- `!123` → repeat command number 123
+- `history -c` → clear history
+- `export HISTIGNORE="ls*" ` → ignore ls in history
+
+**jobs** / **fg** / **bg** / **nohup**
+- `jobs` → list background jobs
+- `sleep 100 &` then `fg` → bring to foreground
+- `nohup long-running-command > output.log 2>&1 &` → run detached
+- `bg` → resume stopped job in background
+- `kill %1` → kill job number 1
+
+### 14. Quick Troubleshooting Favorites (appear in almost every 2025–2026 DevOps list)
+
+**dmesg** — kernel messages
+- `dmesg | tail -20` → last kernel messages
+- `dmesg | grep -i error` → error messages
+- `dmesg --follow` → live view
+- `dmesg -T` → human-readable timestamps
+- `dmesg | grep usb` → USB device issues
+
+**lsof** — list open files
+- `sudo lsof -i :80` → what's using port 80
+- `lsof /var/log/syslog` → who has file open
+- `lsof -p 1234` → files open by PID
+- `sudo lsof -u username` → files by user
+- `lsof +D /var/www` → open files in directory
+
+**strace** — trace system calls (advanced debugging)
+- `strace ls` → see what ls really does
+- `strace -p 1234` → attach to running process
+- `strace -e open curl google.com` → only file opens
+- `strace -o trace.log command` → save to file
+- `strace -tt -T command` → timestamps & duration
+
+**htop** / **btop** (better than top — install if needed)
+- `htop` → colorful interactive process viewer
+- `htop -u user` → only one user
+- `btop` → modern alternative with graphs
+
+### Final Thoughts
+If you're learning for **general use / personal server / cloud / DevOps**, the original list + these additions cover **~95% of daily commands**.
+
+If you're going deeper into specific areas, tell me your goal:
+- DevOps / containers / Kubernetes?
+- Server hardening / security?
+- Shell scripting & automation?
+- Performance troubleshooting?
+
+I can give you the specialized 20–30 commands for that area with examples.
+
+Happy learning! 🚀
